@@ -277,11 +277,7 @@ class SendgridBackend(BaseEmailBackend):
             for alt in msg.alternatives:
                 if alt[1] == "text/html":
                     mail.add_content(Content(alt[1], alt[0]))
-        elif msg.content_subtype == "html":
-            mail.add_content(Content("text/plain", " "))
-            mail.add_content(Content("text/html", msg.body))
-        else:
-            mail.add_content(Content("text/plain", msg.body))
+        mail.add_content(Content("text/html", msg.body))
 
         if hasattr(msg, "categories"):
             for cat in msg.categories:
